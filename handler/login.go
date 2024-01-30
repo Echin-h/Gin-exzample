@@ -31,7 +31,6 @@ func Login(c *gin.Context) {
 		})
 		return
 	} else {
-		c.Set("name", name)
 		token, err := jwt.NewToken(name)
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{

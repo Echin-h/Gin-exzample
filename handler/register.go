@@ -41,6 +41,7 @@ func Register(c *gin.Context) {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"err": err,
 			})
+			return
 		}
 	}
 	c.JSON(http.StatusOK, gin.H{
