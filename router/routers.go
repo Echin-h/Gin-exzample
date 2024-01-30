@@ -14,6 +14,8 @@ func PathUser(r *gin.Engine) {
 		rootPath.POST("/register", handler.Register)
 		rootPath.POST("/login", handler.Login)
 		rootPath.PUT("/update", middleware.Auth(), handler.Update)
-		//rootPath.GET("/read", middleware.Auth(), handler.Read)
+		rootPath.GET("/read", middleware.Auth(), handler.Read)
+		rootPath.DELETE("/delete", middleware.Auth(), handler.Delete)
+		rootPath.POST("out", middleware.Auth(), handler.Out)
 	}
 }
