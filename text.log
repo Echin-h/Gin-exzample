@@ -1,0 +1,4 @@
+{"level":"error","ts":1706691029.0818985,"caller":"middleware/Auth.go:21","msg":"Invalid token format,you need add bearer"}
+{"level":"error","ts":1706858138.7906723,"caller":"middleware/Auth.go:21","msg":"token signature is invalid: signature is invalid"}
+{"level":"error","ts":1706860130.3011763,"caller":"middleware/Auth.go:21","msg":"token has invalid claims: token is expired"}
+{"level":"ERROR","ts":"2024-02-02T15:53:07.594+0800","caller":"middleware/Auth.go:21","msg":"Invalid token format,you need add bearer"}

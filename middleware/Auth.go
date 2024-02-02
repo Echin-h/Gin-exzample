@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"LearningGo/jwt"
+	"LearningGo/log"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -17,6 +18,7 @@ func Auth() gin.HandlerFunc {
 		}
 		parseToken, err := jwt.ParseToken(token)
 		if err != nil {
+			log.SugarLogger.Error(err.Error())
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"msg":   "Failed to Auth",
 				"error": err,

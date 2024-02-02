@@ -2,26 +2,25 @@ package handler
 
 import (
 	"LearningGo/db"
+	"LearningGo/errs"
 	"LearningGo/jwt"
+	"LearningGo/log"
 	"LearningGo/model"
-	"errors"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func Read(c *gin.Context) {
 	payload, exists := c.Get("Payload")
 	if !exists {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"err": errors.New("Failed to Auth"),
-		})
+		errs.Fail(c, errs.UNTHORIZATION.WithTips("Failed to Auth"))
 		return
 	}
 	load := payload.(*jwt.MyCustomClaims)
 	var user model.User
-	db.DB.Where("name = ?", load.User).First(&user)
-	c.JSON(http.StatusOK, gin.H{
-		"it is:": "你的用户信息",
-		"msg":    user,
-	})
+	tx := db.DB.Where("name = ?", load.User).First(&user)
+	if tx.Error != nil {
+		log.SugarLogger.Error(tx.Error)
+		errs.Fail(c, errs.DB_CRUD_ERROR.WithOrigin(tx.Error))
+	}
+	errs.Success(c, user)
 }
