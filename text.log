@@ -2,3 +2,13 @@
 {"level":"error","ts":1706858138.7906723,"caller":"middleware/Auth.go:21","msg":"token signature is invalid: signature is invalid"}
 {"level":"error","ts":1706860130.3011763,"caller":"middleware/Auth.go:21","msg":"token has invalid claims: token is expired"}
 {"level":"ERROR","ts":"2024-02-02T15:53:07.594+0800","caller":"middleware/Auth.go:21","msg":"Invalid token format,you need add bearer"}
+{"level":"ERROR","ts":"2024-02-02T20:51:54.804+0800","caller":"handler/login.go:20","msg":"record not found"}
+{"level":"ERROR","ts":"2024-02-03T14:11:52.375+0800","caller":"config/config.go:12","msg":"open config.yaml: The system cannot find the file specified."}
+{"level":"ERROR","ts":"2024-02-03T14:11:52.395+0800","caller":"db/db.go:29","msg":"dial tcp :0: connectex: The requested address is not valid in its context."}
+{"level":"ERROR","ts":"2024-02-03T14:13:34.266+0800","caller":"config/config.go:12","msg":"open ./config.yaml: The system cannot find the file specified."}
+{"level":"ERROR","ts":"2024-02-03T14:13:34.284+0800","caller":"db/db.go:29","msg":"dial tcp :0: connectex: The requested address is not valid in its context."}
+{"level":"ERROR","ts":"2024-02-03T14:49:33.760+0800","caller":"configs/init.go:8","msg":"Config File \"configs\" Not Found in \"[F:\\\\LearningGo\\\\configs]\""}
+{"level":"ERROR","ts":"2024-02-03T14:51:15.612+0800","caller":"configs/init.go:8","msg":"Config File \"configs\" Not Found in \"[F:\\\\LearningGo\\\\configs\\\\config.yaml]\""}
+{"level":"ERROR","ts":"2024-02-03T14:52:21.998+0800","caller":"configs/init.go:8","msg":"Config File \"configs\" Not Found in \"[F:\\\\LearningGo\\\\config.yaml]\""}
+{"level":"ERROR","ts":"2024-02-03T14:57:52.459+0800","caller":"configs/init.go:8","msg":"Config File \"configs\" Not Found in \"[F:\\\\LearningGo\\\\configs F:\\\\LearningGo]\""}
+{"level":"ERROR","ts":"2024-02-03T14:59:18.138+0800","caller":"configs/init.go:8","msg":"Config File \"config\" Not Found in \"[F:\\\\LearningGo]\""}

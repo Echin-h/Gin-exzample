@@ -1,11 +1,10 @@
 package jwt
 
 import (
+	"LearningGo/configs"
 	"github.com/golang-jwt/jwt/v5"
 	"time"
 )
-
-var jwtKey = []byte("ItIsSecret") // Signature是一个字节数组
 
 // 把claims作为一个结构体
 type Payload struct {
@@ -27,8 +26,8 @@ func NewToken(name string) (string, error) {
 			User:       name,
 		},
 		RegisteredClaims: jwt.RegisteredClaims{
-			Issuer:    "Echin",
-			Subject:   "Tom",
+			Issuer:    configs.JwtSettings.Issuer,
+			Subject:   configs.JwtSettings.Subject,
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 24)),
 			// jwt.NewNumericDate 可以创建一个符合JWT标准的时间格式
 		},
@@ -38,7 +37,7 @@ func NewToken(name string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims) // Header,token是一个对象
 
 	//签名并获取完整的编码令牌作为字符串  Signature
-	tokenString, err := token.SignedString(jwtKey)
+	tokenString, err := token.SignedString([]byte(configs.JwtSettings.SecretKey))
 	if err != nil {
 		return "", err
 	}

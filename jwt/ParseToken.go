@@ -1,8 +1,8 @@
 package jwt
 
 import (
+	"LearningGo/configs"
 	"errors"
-	"fmt"
 	"github.com/golang-jwt/jwt/v5"
 	"strings"
 )
@@ -24,10 +24,9 @@ func ParseToken(bearerToken string) (*MyCustomClaims, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("Unexpected Signing Method")
 		}
-		return jwtKey, nil
+		return []byte(configs.JwtSettings.SecretKey), nil
 	})
 	if err != nil {
-		fmt.Println(err)
 		return nil, err
 	}
 	return claims, nil

@@ -1,0 +1,15 @@
+#数据库信息
+database:
+  root: "root"
+  password: "123456"
+  host: "localhost"
+  port: 3306
+  dbname: "itcast"
+  charset: "utf8mb4"
+  parseTime: "True"
+  loc: "Local"
+#鉴权信息
+jwt:
+  Issuer: "Echin"
+  Subject: "Tom"
+  SecretKey: "ItIsSecret"

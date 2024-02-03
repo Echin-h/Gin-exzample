@@ -1,6 +1,7 @@
 package main
 
 import (
+	"LearningGo/configs"
 	"LearningGo/db"
 	"LearningGo/log"
 	"LearningGo/router"
@@ -9,8 +10,10 @@ import (
 
 func main() {
 	r := gin.Default()
-	db.Init()
+
 	log.InitLogger()
+	configs.Init()
+	db.Init()
 	router.PathUser(r)
 
 	panic(r.Run(":9090"))
