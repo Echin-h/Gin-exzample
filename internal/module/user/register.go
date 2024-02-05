@@ -1,10 +1,10 @@
-package handler
+package user
 
 import (
-	"LearningGo/db"
-	"LearningGo/errs"
-	"LearningGo/log"
-	"LearningGo/model"
+	"LearningGo/internal/global/db"
+	errs2 "LearningGo/internal/global/errs"
+	"LearningGo/internal/global/log"
+	"LearningGo/internal/model"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,19 +12,19 @@ func Register(c *gin.Context) {
 	var user model.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		log.SugarLogger.Error(err)
-		errs.Fail(c, errs.INVALID_REQUEST.WithOrigin(err))
+		errs2.Fail(c, errs2.INVALID_REQUEST.WithOrigin(err))
 		return
 	}
 
 	if len(user.Name) == 0 || len(user.Password) == 0 || len(user.Email) == 0 {
-		errs.Fail(c, errs.LOGIN_ERROR.WithTips("Username, password or email is required..."))
+		errs2.Fail(c, errs2.LOGIN_ERROR.WithTips("Username, password or email is required..."))
 		return
 	}
 
 	var v1 model.User
 	result := db.DB.Where("name = ?", user.Name).First(&v1)
 	if result.Error == nil {
-		errs.Fail(c, errs.LOGIN_ERROR.WithTips("姓名重复"))
+		errs2.Fail(c, errs2.LOGIN_ERROR.WithTips("姓名重复"))
 	}
 
 	if err := db.DB.Create(&user).Error; err != nil {
@@ -34,9 +34,9 @@ func Register(c *gin.Context) {
 			return
 		}
 		log.SugarLogger.Error(err)
-		errs.Fail(c, errs.DB_CRUD_ERROR.WithOrigin(err))
+		errs2.Fail(c, errs2.DB_CRUD_ERROR.WithOrigin(err))
 		return
 	}
 
-	errs.Success(c, "注册成功")
+	errs2.Success(c, "注册成功")
 }

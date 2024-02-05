@@ -1,20 +1,8 @@
 package main
 
-import (
-	"LearningGo/configs"
-	"LearningGo/db"
-	"LearningGo/log"
-	"LearningGo/router"
-	"github.com/gin-gonic/gin"
-)
+import "LearningGo/cmd/server"
 
 func main() {
-	r := gin.Default()
-
-	log.InitLogger()
-	configs.Init()
-	db.Init()
-	router.PathUser(r)
-
-	panic(r.Run(":9090"))
+	server.Init() // DB,config的Init
+	server.Run()  //log,recovery,router的run
 }

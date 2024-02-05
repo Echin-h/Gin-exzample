@@ -1,6 +1,7 @@
 package log
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -11,7 +12,15 @@ var (
 	SugarLogger *zap.SugaredLogger
 )
 
-func InitLogger() {
+// 做一个闭包
+func Init() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		initLogger()
+		c.Next()
+	}
+}
+
+func initLogger() {
 	Encoder := getEncoder()
 	WriterSyncer := getWriterSyncer()
 	core := zapcore.NewCore(Encoder, WriterSyncer, zapcore.DebugLevel)

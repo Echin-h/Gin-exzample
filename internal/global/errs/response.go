@@ -2,6 +2,7 @@ package errs
 
 import (
 	"errors"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -43,16 +44,14 @@ func Fail(c *gin.Context, err error) {
 	c.Abort()
 }
 
-/*
 func Recovery(c *gin.Context) {
-	info := recover()
-	if info != nil {
+	if info := recover(); info != nil {
 		err, ok := info.(error)
 		if ok {
-			Fail(c, errors.WithStack(err))
+			Fail(c, SERVE_INTERNAL.WithOrigin(err))
 		} else {
-			Fail(c, errors.New)
+			Fail(c, errors.New(fmt.Sprintf("%+v", info)))
 		}
+		return
 	}
-	return
-}*/
+}

@@ -2,7 +2,7 @@ package db
 
 import (
 	"LearningGo/configs"
-	"LearningGo/log"
+	"LearningGo/internal/global/log"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

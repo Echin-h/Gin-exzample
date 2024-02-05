@@ -1,11 +1,11 @@
-package handler
+package user
 
 import (
-	"LearningGo/db"
-	"LearningGo/errs"
-	"LearningGo/jwt"
-	"LearningGo/log"
-	"LearningGo/model"
+	"LearningGo/internal/global/db"
+	errs2 "LearningGo/internal/global/errs"
+	"LearningGo/internal/global/jwt"
+	"LearningGo/internal/global/log"
+	"LearningGo/internal/model"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,21 +18,21 @@ func Login(c *gin.Context) {
 	var v2 model.User
 	if tx := db.DB.Where(" name = ? ", name).First(&v2); tx.Error != nil {
 		log.SugarLogger.Error(tx.Error)
-		errs.Fail(c, errs.DB_CRUD_ERROR.WithOrigin(tx.Error))
+		errs2.Fail(c, errs2.DB_CRUD_ERROR.WithOrigin(tx.Error))
 		return
 	}
 
 	if password != v2.Password {
-		errs.Fail(c, errs.LOGIN_ERROR.WithTips("密码错误"))
+		errs2.Fail(c, errs2.LOGIN_ERROR.WithTips("密码错误"))
 		return
 	}
 
 	token, err := jwt.NewToken(name)
 	if err != nil {
 		log.SugarLogger.Error(err)
-		errs.Fail(c, errs.UNTHORIZATION.WithOrigin(err))
+		errs2.Fail(c, errs2.UNTHORIZATION.WithOrigin(err))
 		return
 	}
 
-	errs.Success(c, v2, map[string]string{"token": token})
+	errs2.Success(c, v2, map[string]string{"token": token})
 }

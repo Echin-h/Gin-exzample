@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"LearningGo/jwt"
-	"LearningGo/log"
+	"LearningGo/internal/global/jwt"
+	"LearningGo/internal/global/log"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

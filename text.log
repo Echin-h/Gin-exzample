@@ -12,3 +12,4 @@
 {"level":"ERROR","ts":"2024-02-03T14:52:21.998+0800","caller":"configs/init.go:8","msg":"Config File \"configs\" Not Found in \"[F:\\\\LearningGo\\\\config.yaml]\""}
 {"level":"ERROR","ts":"2024-02-03T14:57:52.459+0800","caller":"configs/init.go:8","msg":"Config File \"configs\" Not Found in \"[F:\\\\LearningGo\\\\configs F:\\\\LearningGo]\""}
 {"level":"ERROR","ts":"2024-02-03T14:59:18.138+0800","caller":"configs/init.go:8","msg":"Config File \"config\" Not Found in \"[F:\\\\LearningGo]\""}
+{"level":"ERROR","ts":"2024-02-03T19:56:27.212+0800","caller":"middleware/Auth.go:21","msg":"Invalid token format,you need add bearer"}
