@@ -349,7 +349,9 @@ func Fail(c *gin.Context, err error) {
 
 往后的返回中会将c.JSON抛弃，然后返回更加统一的Error类型的错误，
 
-通过一开始预定义的错误字段来返回相应的基础错误，同时还可以通过Withtips/WtihWrap方法来增加错误信息
+通过一开始预定义的错误字段来返回相应的基础错误，同时还可以通过Withtips/WtihOrigin方法来增加错误信息
+
+tips:Fail(c,err error)需要传入一个error类型的一个接口，所以只要*Error实现了这个接口就能够进行传参，太妙了，所以Error()接口不是白写的，上面有句话说错了。
 
 * **jwt**
 
