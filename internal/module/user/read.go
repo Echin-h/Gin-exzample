@@ -1,6 +1,7 @@
 package user
 
 import (
+	"LearningGo/internal/global/casbin"
 	"LearningGo/internal/global/db"
 	errs2 "LearningGo/internal/global/errs"
 	"LearningGo/internal/global/jwt"
@@ -16,6 +17,11 @@ func Read(c *gin.Context) {
 		return
 	}
 	load := payload.(*jwt.MyCustomClaims)
+	ok := casbin.GetEnforce().CheckUserPolicyForRead(load.User, "users", "read")
+	if !ok {
+		errs2.Fail(c, errs2.UNTHORIZATION.WithTips("No Permission"))
+		return
+	}
 	var user model.User
 	tx := db.DB.Where("name = ?", load.User).First(&user)
 	if tx.Error != nil {

@@ -1,6 +1,7 @@
 package user
 
 import (
+	"LearningGo/internal/global/casbin"
 	"LearningGo/internal/global/db"
 	errs2 "LearningGo/internal/global/errs"
 	"LearningGo/internal/global/jwt"
@@ -19,6 +20,11 @@ func Update(c *gin.Context) {
 		return
 	}
 	load := payload.(*jwt.MyCustomClaims)
+	ok := casbin.Enforce.CheckUserPolicyForRead(load.User, "users", "write")
+	if !ok {
+		errs2.Fail(c, errs2.UNTHORIZATION.WithTips("没有权限修改"))
+		return
+	}
 	tx := db.DB.Model(&model.User{}).Where("name = ? ", load.User).Update("password", NewPassword)
 	if tx.Error != nil {
 		log.SugarLogger.Error(tx.Error)

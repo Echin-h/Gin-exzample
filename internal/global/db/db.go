@@ -3,6 +3,7 @@ package db
 import (
 	"LearningGo/configs"
 	"LearningGo/internal/global/log"
+	"LearningGo/internal/model"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -33,5 +34,10 @@ func Connect() *gorm.DB {
 		return nil
 	}
 	fmt.Println("连接数据库成功")
+	err1 := db.AutoMigrate(&model.User{})
+	if err1 != nil {
+		log.SugarLogger.Error(err1)
+	}
+	fmt.Println("数据库迁移成功")
 	return db
 }

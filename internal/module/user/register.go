@@ -1,6 +1,7 @@
 package user
 
 import (
+	"LearningGo/internal/global/casbin"
 	"LearningGo/internal/global/db"
 	errs2 "LearningGo/internal/global/errs"
 	"LearningGo/internal/global/log"
@@ -28,15 +29,15 @@ func Register(c *gin.Context) {
 	}
 
 	if err := db.DB.Create(&user).Error; err != nil {
-		err1 := db.DB.AutoMigrate(&user)
-		if err1 != nil {
-			log.SugarLogger.Error(err1)
-			return
-		}
 		log.SugarLogger.Error(err)
 		errs2.Fail(c, errs2.DB_CRUD_ERROR.WithOrigin(err))
 		return
 	}
-
+	err := casbin.Enforce.LinkUserWithPolicy(user.Name)
+	if err != nil {
+		log.SugarLogger.Error(err)
+		errs2.Fail(c, errs2.SERVE_INTERNAL.WithOrigin(err))
+		return
+	}
 	errs2.Success(c, "注册成功")
 }

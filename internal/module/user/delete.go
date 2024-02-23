@@ -1,6 +1,7 @@
 package user
 
 import (
+	"LearningGo/internal/global/casbin"
 	"LearningGo/internal/global/db"
 	errs2 "LearningGo/internal/global/errs"
 	"LearningGo/internal/global/jwt"
@@ -18,9 +19,12 @@ func Delete(c *gin.Context) {
 		errs2.Fail(c, errs2.UNTHORIZATION.WithTips("没有获取到payload"))
 		return
 	}
-
 	load := payload.(*jwt.MyCustomClaims)
-
+	ok := casbin.Enforce.CheckUserPolicyForRead(load.User, "users", "write")
+	if !ok {
+		errs2.Fail(c, errs2.UNTHORIZATION.WithTips("没有权限修改"))
+		return
+	}
 	var user model.User
 	db.DB.Where("name = ?", load.User).First(&user)
 	if user.Password != password {

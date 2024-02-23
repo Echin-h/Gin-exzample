@@ -3,8 +3,8 @@ package configs
 import "github.com/spf13/viper"
 
 var (
-	DbSettings  *DatabaseSettings
-	JwtSettings *JWTSettings
+	DbSettings  DatabaseSettings
+	JwtSettings JWTSettings
 )
 
 type Setting struct {

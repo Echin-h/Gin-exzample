@@ -13,3 +13,8 @@
 {"level":"ERROR","ts":"2024-02-03T14:57:52.459+0800","caller":"configs/init.go:8","msg":"Config File \"configs\" Not Found in \"[F:\\\\LearningGo\\\\configs F:\\\\LearningGo]\""}
 {"level":"ERROR","ts":"2024-02-03T14:59:18.138+0800","caller":"configs/init.go:8","msg":"Config File \"config\" Not Found in \"[F:\\\\LearningGo]\""}
 {"level":"ERROR","ts":"2024-02-03T19:56:27.212+0800","caller":"middleware/Auth.go:21","msg":"Invalid token format,you need add bearer"}
+{"level":"ERROR","ts":"2024-02-23T20:33:47.836+0800","caller":"middleware/Auth.go:21","msg":"Invalid token format,you need add bearer"}
+{"level":"ERROR","ts":"2024-02-23T20:34:08.716+0800","caller":"middleware/Auth.go:21","msg":"Invalid token format,you need add bearer"}
+{"level":"ERROR","ts":"2024-02-23T20:34:56.417+0800","caller":"middleware/Auth.go:21","msg":"Invalid token format,you need add bearer"}
+{"level":"ERROR","ts":"2024-02-23T20:35:02.537+0800","caller":"middleware/Auth.go:21","msg":"Invalid token format,you need add bearer"}
+{"level":"ERROR","ts":"2024-02-23T21:39:32.352+0800","caller":"user/read.go:28","msg":"record not found"}
