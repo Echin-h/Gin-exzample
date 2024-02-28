@@ -26,6 +26,7 @@ func Register(c *gin.Context) {
 	result := db.DB.Where("name = ?", user.Name).First(&v1)
 	if result.Error == nil {
 		errs2.Fail(c, errs2.LOGIN_ERROR.WithTips("姓名重复"))
+		return
 	}
 
 	if err := db.DB.Create(&user).Error; err != nil {
